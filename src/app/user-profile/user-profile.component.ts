@@ -36,7 +36,12 @@ export class UserProfileComponent implements OnInit {
     this.getFavorites();
     console.log(this.userData);
   }
-
+  /**
+   * calls API endpoint to get user info
+   * @function getUserProfile
+   * @param user
+   * @return user data in JSON format
+   */
   getUser(): void {
     const user = localStorage.getItem('user');
     if (user) {
@@ -47,7 +52,10 @@ export class UserProfileComponent implements OnInit {
       });
     }
   }
-
+  /**
+   * edits user info from profile page
+   * @function editUserProfile
+   */
   editUser(): void {
     console.log(this.userData);
     this.fetchApiData.editUserProfile(this.userData).subscribe((resp) => {
@@ -60,8 +68,10 @@ export class UserProfileComponent implements OnInit {
       });
     });
   }
-
-
+  /**
+   * deletes user account when on profile page
+   * @function deleteUserProfile
+   */
   deleteUser(): void {
     if (confirm('Are you sure? This cannot be undone.')) {
       this.fetchApiData.deleteUserProfile().subscribe(() => {
@@ -73,7 +83,10 @@ export class UserProfileComponent implements OnInit {
       this.router.navigate(['welcome']);
     }
   }
-
+    /**
+   * function to let the user remove a movie from their favorited movies
+   * @function deleteFavoriteMovie
+   */
   removeFavoriteMovie(id: string): void {
     this.fetchApiData.deleteFavoriteMovie(id).subscribe((resp: any) => {
       console.log(resp);
@@ -86,7 +99,10 @@ export class UserProfileComponent implements OnInit {
         this.ngOnInit();
       });
     }
-
+    /**
+     * function to let the user display their favorited movies 
+     * @function getAllMovies
+     */ 
     getFavorites(): void {
       let movies: any[] = [];
       this.fetchApiData.getAllMovies().subscribe((res: any) => {
